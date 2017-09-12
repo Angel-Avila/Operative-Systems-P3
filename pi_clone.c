@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
   // long lElapsedTime;
   struct timeval ts;
   double pi;
-  int i, status;l
+  int i, status;
   int args[NTHREADS];
   void * stack;
 

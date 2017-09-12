@@ -1,4 +1,6 @@
-
+/*
+Equipo: Angel Avila, Giovanni Mazzolo
+*/
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>

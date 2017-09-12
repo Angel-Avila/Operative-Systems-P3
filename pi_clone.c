@@ -1,4 +1,6 @@
-
+/*
+Equipo: Angel Avila, Giovanni Mazzolo
+*/
 #define _GNU_SOURCE
 
 #include <stdio.h>

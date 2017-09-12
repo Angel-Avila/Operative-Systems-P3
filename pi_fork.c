@@ -10,11 +10,11 @@
 #define NTHREADS 4
 
 long long num_steps = 1000000000;
-double step;
+double step; // Variable global
 
 pthread_mutex_t candado;
 
-void fork_pi(int args, int shmid){
+void fork_pi(int args, int shmid){ // Función
 
   int i, counter_init, counter_end;
   double x, lsum = 0.0;
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 
   pthread_mutex_init(&candado,NULL);
 
-  for(i=0;i<NTHREADS;i++)
+  for(i=0;i<NTHREADS;i++) // Se crean hijos con fork()
 	{
 		args[i]=i;
 
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 
 	}
 
-  for(i=0;i<NTHREADS;i++)
+  for(i=0;i<NTHREADS;i++) // Se esperan a los hijos
   {
     wait(&status);
   }

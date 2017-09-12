@@ -5,17 +5,17 @@
 #include <unistd.h>
 #include <pthread.h>
 
-#define NTHREADS 4
+#define NTHREADS 4 // Número de hilos
 
-long long num_steps = 1000000000;
-double step, sum = 0.0;
+long long num_steps = 1000000000; // ciclos
+double step, sum = 0.0; // Inicalización de variables
 
-pthread_mutex_t candado;
+pthread_mutex_t candado;  // Declaración de candados
 
-void *hilo_pi(void *args){
+void *hilo_pi(void *args){  // Hilo
 
-  int i, tnum, counter_init, counter_end;
-  double x, lsum = 0.0;
+  int i, tnum, counter_init, counter_end; // Declaración de variables
+  double x, lsum = 0.0; // Variables locales
 
   tnum = *((int *) args);
   counter_init = (num_steps/NTHREADS)*tnum;
@@ -26,8 +26,8 @@ void *hilo_pi(void *args){
     x = (i + .5)*step;
     lsum = lsum + 4.0/(1.+ x*x);
   }
-  
-  pthread_mutex_lock(&candado);
+
+  pthread_mutex_lock(&candado); // Se bloquea el recurso para evitar colisiones
   sum += lsum;
   pthread_mutex_unlock(&candado);
 
@@ -54,13 +54,13 @@ int main(int argc, char* argv[])
 
   pthread_mutex_init(&candado,NULL);
 
-  for(i=0;i<NTHREADS;i++)
+  for(i=0;i<NTHREADS;i++) // Se crean los hilos
 	{
 		args[i]=i;
 		pthread_create(&thread_id[i],NULL,hilo_pi,(void *) &args[i]);
 	}
 
-  for(i=0;i<NTHREADS;i++)
+  for(i=0;i<NTHREADS;i++) // Se esperan a los hilos
   {
 		pthread_join(thread_id[i],NULL);
   }
